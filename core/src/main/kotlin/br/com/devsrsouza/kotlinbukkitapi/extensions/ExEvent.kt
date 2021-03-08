@@ -2,7 +2,10 @@ package br.com.devsrsouza.kotlinbukkitapi.extensions.event
 
 import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.WithPlugin
 import org.bukkit.Bukkit
-import org.bukkit.event.*
+import org.bukkit.event.Event
+import org.bukkit.event.EventPriority
+import org.bukkit.event.HandlerList
+import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.plugin.Plugin
 import kotlin.reflect.KClass

@@ -9,25 +9,29 @@ import kotlin.coroutines.coroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
 internal val coroutineContextTakes = ConcurrentHashMap<CoroutineContext, TakeValues>()
+
 internal data class TakeValues(val startTimeMilliseconds: Long, val takeTimeMillisecond: Long) {
     fun wasTimeExceeded() = System.currentTimeMillis() - startTimeMilliseconds - takeTimeMillisecond >= 0
 }
 
+@ExperimentalTime
 suspend fun WithPlugin<*>.takeMaxPerTick(
-        time: Duration
+    time: Duration
 ) = plugin.takeMaxPerTick(time)
 
+@ExperimentalTime
 suspend fun Plugin.takeMaxPerTick(time: Duration) {
     val takeValues = getTakeValuesOrNull(coroutineContext)
 
-    if(takeValues == null) {
+    if (takeValues == null) {
         // registering take max at current millisecond
         registerCoroutineContextTakes(coroutineContext, time)
     } else {
         // checking if this exceeded the max time of execution
-        if(takeValues.wasTimeExceeded()) {
+        if (takeValues.wasTimeExceeded()) {
             unregisterCoroutineContextTakes(coroutineContext)
             suspendCoroutine<Unit> { continuation ->
                 task(1) {
@@ -39,21 +43,19 @@ suspend fun Plugin.takeMaxPerTick(time: Duration) {
 }
 
 internal fun getTakeValuesOrNull(
-        coroutineContext: CoroutineContext
+    coroutineContext: CoroutineContext
 ): TakeValues? = coroutineContextTakes[coroutineContext]
 
+@ExperimentalTime
 internal fun registerCoroutineContextTakes(
-        coroutineContext: CoroutineContext,
-        time: Duration
+    coroutineContext: CoroutineContext,
+    time: Duration
 ) {
-    coroutineContextTakes.put(
-            coroutineContext,
-            TakeValues(System.currentTimeMillis(), time.toLongMilliseconds())
-    )
+    coroutineContextTakes[coroutineContext] = TakeValues(System.currentTimeMillis(), time.toLongMilliseconds())
 }
 
 internal fun unregisterCoroutineContextTakes(
-        coroutineContext: CoroutineContext
+    coroutineContext: CoroutineContext
 ) {
     coroutineContextTakes.remove(coroutineContext)
 }

@@ -8,6 +8,6 @@ val hasActionBarAPI by lazy { Bukkit.getServer().pluginManager.getPlugin("Action
 
 val Player.actionBarAPI get() = KActionBarAPI(this)
 
-inline class KActionBarAPI(val player: Player) {
+inline class KActionBarAPI(private val player: Player) {
     fun sendActionBar(message: String, duration: Int = 0) = ActionBarAPI.sendActionBar(player, message, duration)
 }

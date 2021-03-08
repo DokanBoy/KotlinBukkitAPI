@@ -1,10 +1,10 @@
 package br.com.devsrsouza.kotlinbukkitapi.dsl.command
 
 import br.com.devsrsouza.kotlinbukkitapi.collections.onlinePlayerMapOf
-import br.com.devsrsouza.kotlinbukkitapi.extensions.text.*
 import br.com.devsrsouza.kotlinbukkitapi.extensions.command.*
 import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.WithPlugin
 import br.com.devsrsouza.kotlinbukkitapi.extensions.skedule.BukkitDispatchers
+import br.com.devsrsouza.kotlinbukkitapi.extensions.text.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob

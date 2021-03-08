@@ -1,14 +1,21 @@
 package br.com.devsrsouza.kotlinbukkitapi.controllers
 
 import br.com.devsrsouza.kotlinbukkitapi.KotlinBukkitAPI
+import br.com.devsrsouza.kotlinbukkitapi.extensions.entity.isPlayer
 import br.com.devsrsouza.kotlinbukkitapi.extensions.event.KListener
 import br.com.devsrsouza.kotlinbukkitapi.extensions.server.onlinePlayers
-import br.com.devsrsouza.kotlinbukkitapi.menu.*
+import br.com.devsrsouza.kotlinbukkitapi.menu.getMenuFromInventory
+import br.com.devsrsouza.kotlinbukkitapi.menu.getMenuFromPlayer
 import br.com.devsrsouza.kotlinbukkitapi.menu.slot.MenuPlayerSlotInteract
+import br.com.devsrsouza.kotlinbukkitapi.menu.slotOrBaseSlot
+import br.com.devsrsouza.kotlinbukkitapi.menu.takeIfHasPlayer
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
-import org.bukkit.event.inventory.*
-import org.bukkit.event.player.PlayerPickupItemEvent
+import org.bukkit.event.entity.EntityPickupItemEvent
+import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.event.inventory.InventoryDragEvent
+import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.server.PluginDisableEvent
 
 internal class MenuController(
@@ -21,9 +28,8 @@ internal class MenuController(
 
     @EventHandler
     fun pluginDisableEvent(event: PluginDisableEvent) {
-        onlinePlayers.forEach {
-            val menu = getMenuFromPlayer(it)
-                    ?.takeIf { it.plugin.name == event.plugin.name }
+        onlinePlayers.forEach { it ->
+            val menu = getMenuFromPlayer(it)?.takeIf { it.plugin.name == event.plugin.name }
             menu?.close(it, true)
         }
     }
@@ -81,7 +87,8 @@ internal class MenuController(
     }
 
     @EventHandler(ignoreCancelled = true)
-    fun onPickupItemEvent(event: PlayerPickupItemEvent) {
-        if (getMenuFromPlayer(event.player) != null) event.isCancelled = true
+    fun onPickupItemEvent(event: EntityPickupItemEvent) {
+        if (!event.entity.isPlayer()) return
+        if (getMenuFromPlayer(event.entity as Player) != null) event.isCancelled = true
     }
 }

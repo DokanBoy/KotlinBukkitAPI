@@ -1,6 +1,5 @@
 package br.com.devsrsouza.kotlinbukkitapi.dsl.menu.pagination
 
-import br.com.devsrsouza.kotlinbukkitapi.collections.ObservableCollection
 import br.com.devsrsouza.kotlinbukkitapi.dsl.menu.MenuDSL
 import br.com.devsrsouza.kotlinbukkitapi.dsl.menu.pagination.slot.PaginationSlotDSL
 import br.com.devsrsouza.kotlinbukkitapi.dsl.menu.pagination.slot.PaginationSlotDSLImpl

@@ -2,7 +2,10 @@ package br.com.devsrsouza.kotlinbukkitapi.dsl.command
 
 import br.com.devsrsouza.kotlinbukkitapi.collections.ExpirationList
 import br.com.devsrsouza.kotlinbukkitapi.collections.ExpirationMap
-import br.com.devsrsouza.kotlinbukkitapi.extensions.text.*
+import br.com.devsrsouza.kotlinbukkitapi.extensions.text.asText
+import br.com.devsrsouza.kotlinbukkitapi.extensions.text.color
+import br.com.devsrsouza.kotlinbukkitapi.extensions.text.msg
+import br.com.devsrsouza.kotlinbukkitapi.extensions.text.showText
 import net.md_5.bungee.api.chat.BaseComponent
 import org.bukkit.ChatColor
 

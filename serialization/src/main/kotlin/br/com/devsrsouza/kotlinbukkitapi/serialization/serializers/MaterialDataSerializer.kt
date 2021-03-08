@@ -1,7 +1,9 @@
 package br.com.devsrsouza.kotlinbukkitapi.serialization.serializers
 
 import br.com.devsrsouza.kotlinbukkitapi.extensions.item.asMaterialData
-import kotlinx.serialization.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -10,6 +12,7 @@ import kotlinx.serialization.encoding.Encoder
 import org.bukkit.Material
 import org.bukkit.material.MaterialData
 
+@ExperimentalSerializationApi
 @Serializer(forClass = MaterialData::class)
 object MaterialDataSerializer : KSerializer<MaterialData> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(

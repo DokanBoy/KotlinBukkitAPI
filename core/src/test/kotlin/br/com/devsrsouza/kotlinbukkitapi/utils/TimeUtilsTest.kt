@@ -1,7 +1,8 @@
 package br.com.devsrsouza.kotlinbukkitapi.utils
 
-import br.com.devsrsouza.kotlinbukkitapi.utils.time.*
-import org.junit.Assert.*
+import br.com.devsrsouza.kotlinbukkitapi.utils.time.ticks
+import br.com.devsrsouza.kotlinbukkitapi.utils.time.toLongTicks
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime

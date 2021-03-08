@@ -1,6 +1,8 @@
 package br.com.devsrsouza.kotlinbukkitapi.dsl.command.arguments
 
-import br.com.devsrsouza.kotlinbukkitapi.dsl.command.*
+import br.com.devsrsouza.kotlinbukkitapi.dsl.command.Executor
+import br.com.devsrsouza.kotlinbukkitapi.dsl.command.TabCompleter
+import br.com.devsrsouza.kotlinbukkitapi.dsl.command.fail
 import br.com.devsrsouza.kotlinbukkitapi.extensions.item.asMaterialData
 import br.com.devsrsouza.kotlinbukkitapi.extensions.text.color
 import net.md_5.bungee.api.chat.BaseComponent

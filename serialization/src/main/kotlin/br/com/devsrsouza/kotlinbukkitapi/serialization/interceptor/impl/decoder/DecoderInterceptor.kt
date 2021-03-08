@@ -1,7 +1,7 @@
 package br.com.devsrsouza.kotlinbukkitapi.serialization.interceptor.impl.decoder
 
 import br.com.devsrsouza.kotlinbukkitapi.serialization.interceptor.SerializationDecodeInterceptor
-import kotlinx.serialization.*
+import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.CompositeDecoder
 import kotlinx.serialization.encoding.Decoder

@@ -1,7 +1,8 @@
 import org.gradle.api.Action
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.kotlin.dsl.DependencyHandlerScope
-import org.gradle.kotlin.dsl.*
+import org.gradle.kotlin.dsl.exclude
+import org.gradle.kotlin.dsl.kotlin
 
 fun DependencyHandlerScope.baseDependencies(): List<Any> = listOf(
         kotlin("stdlib-jdk8"),

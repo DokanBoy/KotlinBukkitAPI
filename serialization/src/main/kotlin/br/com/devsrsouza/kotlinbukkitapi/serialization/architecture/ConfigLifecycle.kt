@@ -9,10 +9,7 @@ import br.com.devsrsouza.kotlinbukkitapi.serialization.architecture.impl.ConfigD
 import br.com.devsrsouza.kotlinbukkitapi.serialization.architecture.impl.getOrInsertConfigLifecycle
 import br.com.devsrsouza.kotlinbukkitapi.serialization.architecture.impl.registerConfiguration
 import com.charleskorn.kaml.Yaml
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.StringFormat
-import kotlinx.serialization.serializer
+import kotlinx.serialization.*
 import java.io.File
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
@@ -38,27 +35,28 @@ import kotlin.reflect.typeOf
  * uses a parser that Parser a Location or a World that is not loaded yet.
  * @param saveOnDisable: If true, saves the current [SerializationConfig.model] to the configuration file.
  */
+@ExperimentalSerializationApi
 fun <T : Any> KotlinPlugin.config(
-        file: String,
-        defaultModel: T,
-        serializer: KSerializer<T>,
-        type: StringFormat = Yaml(BukkitSerialModule()),
-        loadOnEnable: Boolean = false,
-        saveOnDisable: Boolean = false,
-        alwaysRestoreDefaults: Boolean = true
+    file: String,
+    defaultModel: T,
+    serializer: KSerializer<T>,
+    type: StringFormat = Yaml(BukkitSerialModule()),
+    loadOnEnable: Boolean = false,
+    saveOnDisable: Boolean = false,
+    alwaysRestoreDefaults: Boolean = true
 ): SerializationConfig<T> {
     val configFile = File(dataFolder, file)
 
     return SerializationConfig(
-            defaultModel,
-            configFile,
-            serializer,
-            type,
-            alwaysRestoreDefaults,
-            eventObservable = {
-                if (it == KotlinConfigEvent.RELOAD)
-                    someConfigReloaded()
-            }
+        defaultModel,
+        configFile,
+        serializer,
+        type,
+        alwaysRestoreDefaults,
+        eventObservable = {
+            if (it == KotlinConfigEvent.RELOAD)
+                someConfigReloaded()
+        }
     ).also {
         registerConfiguration(it as SerializationConfig<Any>, loadOnEnable, saveOnDisable)
     }
@@ -67,6 +65,7 @@ fun <T : Any> KotlinPlugin.config(
 /**
  * Gets the config for the given [KType]
  */
+@ExperimentalSerializationApi
 fun LifecycleListener<*>.getConfig(type: KType): SerializationConfig<*> {
     try {
         val serialName = serializer(type).descriptor.serialName
@@ -86,20 +85,20 @@ fun LifecycleListener<*>.getConfig(type: KType): SerializationConfig<*> {
  */
 
 fun <T : Any> LifecycleListener<*>.config(type: KType): ConfigDelegate<T, T> {
-    return config(type, { this })
+    return config(type) { this }
 }
 
-@OptIn(ExperimentalStdlibApi::class)
+@ExperimentalSerializationApi
 inline fun <reified T : Any> LifecycleListener<*>.config(): ConfigDelegate<T, T> = config<T>(typeOf<T>())
 
 fun <T : Any, R> LifecycleListener<*>.config(
-        type: KType,
-        deep: T.() -> R
+    type: KType,
+    deep: T.() -> R
 ): ConfigDelegate<T, R> {
     return ConfigDelegate(type, deep)
 }
 
-@OptIn(ExperimentalStdlibApi::class)
+@ExperimentalSerializationApi
 inline fun <reified T : Any, R> LifecycleListener<*>.config(
-        noinline deep: T.() -> R
+    noinline deep: T.() -> R
 ): ConfigDelegate<T, R> = config(typeOf<T>(), deep)

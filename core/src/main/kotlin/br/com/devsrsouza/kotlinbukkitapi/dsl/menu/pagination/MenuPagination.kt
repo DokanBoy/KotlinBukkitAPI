@@ -1,14 +1,12 @@
 package br.com.devsrsouza.kotlinbukkitapi.dsl.menu.pagination
 
 import br.com.devsrsouza.kotlinbukkitapi.collections.ObservableCollection
-import br.com.devsrsouza.kotlinbukkitapi.collections.ObservableList
 import br.com.devsrsouza.kotlinbukkitapi.dsl.menu.MenuDSL
 import br.com.devsrsouza.kotlinbukkitapi.dsl.menu.pagination.slot.PaginationSlotDSL
 import br.com.devsrsouza.kotlinbukkitapi.dsl.menu.slot.SlotDSL
 import br.com.devsrsouza.kotlinbukkitapi.menu.MenuPlayer
 import br.com.devsrsouza.kotlinbukkitapi.menu.MenuPlayerInventory
 import org.bukkit.entity.Player
-import java.lang.IllegalArgumentException
 import java.util.*
 
 typealias ItemsProvider<T> = () -> ObservableCollection<T>

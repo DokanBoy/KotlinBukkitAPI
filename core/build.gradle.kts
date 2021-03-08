@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("plugin.serialization") version Dep.Versions.kotlin
 }
@@ -15,4 +17,8 @@ dependencies {
     testImplementation("org.junit.vintage:junit-vintage-engine:5.3.2")
 
     testImplementation("org.mockito:mockito-core:2.24.0")
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    freeCompilerArgs = listOf("-Xinline-classes")
 }

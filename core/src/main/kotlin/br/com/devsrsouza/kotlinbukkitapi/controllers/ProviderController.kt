@@ -24,11 +24,11 @@ internal class ProviderController(
     }
 
     fun unregister(plugin: Plugin, any: Any): Boolean {
-        return providerTree.get(plugin.name)?.remove(any::class) == true
+        return providerTree[plugin.name]?.remove(any::class) == true
     }
 
     fun <T : Any> find(plugin: Plugin, kclass: KClass<T>): T {
-        return providerTree.get(plugin.name)?.get(kclass) as T
+        return providerTree[plugin.name]?.get(kclass) as T
     }
 
     override fun onEnable() {
