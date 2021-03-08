@@ -11,6 +11,7 @@ import com.okkero.skedule.schedule
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
 fun WithPlugin<*>.schedule(
         initialContext: SynchronizationContext = SynchronizationContext.SYNC,
@@ -46,6 +47,7 @@ inline class PluginDispatcher(val plugin: JavaPlugin) {
 
 // Take max millisecond in a tick
 
+@ExperimentalTime
 suspend fun BukkitSchedulerController.takeMaxPerTick(time: Duration) {
     val takeValues = getTakeValuesOrNull(context)
 

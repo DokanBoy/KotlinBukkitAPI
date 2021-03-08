@@ -16,7 +16,7 @@ fun PlayerInventory.clearAll() {
     clearArmor()
 }
 
-val Player.hasItemInHand get() = itemInHand != null && itemInHand.type != Material.AIR
+val Player.hasItemInHand get() = inventory.itemInMainHand != null && inventory.itemInMainHand.type != Material.AIR
 
 fun Player.playSound(sound: Sound, volume: Float, pitch: Float) = playSound(location, sound, volume, pitch)
 fun Player.playNote(instrument: Instrument, note: Note) = playNote(location, instrument, note)

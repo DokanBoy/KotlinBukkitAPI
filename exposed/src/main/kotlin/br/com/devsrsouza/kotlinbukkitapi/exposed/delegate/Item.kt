@@ -8,7 +8,6 @@ import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.statements.api.ExposedBlob
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.sql.Blob
 import kotlin.reflect.KProperty
 
 /**

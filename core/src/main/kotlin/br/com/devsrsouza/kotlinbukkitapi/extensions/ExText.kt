@@ -5,11 +5,11 @@ import net.md_5.bungee.api.chat.ClickEvent
 import net.md_5.bungee.api.chat.HoverEvent
 import net.md_5.bungee.api.chat.TextComponent
 import net.md_5.bungee.chat.ComponentSerializer
-import net.md_5.bungee.api.ChatColor as BungeeColor
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import kotlin.reflect.KProperty
+import net.md_5.bungee.api.ChatColor as BungeeColor
 
 fun CommandSender.msg(message: String) = sendMessage(message)
 fun CommandSender.msg(message: Array<String>) = sendMessage(message)

@@ -1,13 +1,15 @@
 package br.com.devsrsouza.kotlinbukkitapi.dsl.command.arguments
 
-import br.com.devsrsouza.kotlinbukkitapi.dsl.command.*
+import br.com.devsrsouza.kotlinbukkitapi.dsl.command.CommandFailException
+import br.com.devsrsouza.kotlinbukkitapi.dsl.command.Executor
+import br.com.devsrsouza.kotlinbukkitapi.dsl.command.TabCompleter
+import br.com.devsrsouza.kotlinbukkitapi.dsl.command.fail
 import br.com.devsrsouza.kotlinbukkitapi.extensions.text.color
 import br.com.devsrsouza.kotlinbukkitapi.utils.FALSE_CASES
 import br.com.devsrsouza.kotlinbukkitapi.utils.TRUE_CASES
 import br.com.devsrsouza.kotlinbukkitapi.utils.toBooleanOrNull
 import net.md_5.bungee.api.chat.BaseComponent
 import org.bukkit.ChatColor
-import org.bukkit.Material
 
 // STRING
 

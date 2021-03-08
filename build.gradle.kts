@@ -1,5 +1,4 @@
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
-import org.gradle.api.tasks.bundling.Jar
 
 plugins {
     id("java")
@@ -7,7 +6,7 @@ plugins {
     kotlin("jvm")
     id("com.github.johnrengelman.shadow")
     id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
-    id("com.jfrog.bintray") version "1.8.4"
+    id("com.jfrog.bintray") version "1.8.5"
     id("me.bristermitten.pdm")
 }
 

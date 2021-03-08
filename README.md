@@ -11,57 +11,63 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?color=ORANGE&style=for-the-badge)](https://choosealicense.com/licenses/mit)
 [![Build Status](https://img.shields.io/jenkins/build?jobUrl=http%3A%2F%2Fjenkins.devsrsouza.com.br%2Fjob%2FKotlinBukkitAPI%2F&style=for-the-badge)](http://jenkins.devsrsouza.com.br/job/KotlinBukkitAPI/)
 
-KotlinBukkitAPI is an API for Bukkit/SpigotAPI using the cool and nifty features Kotlin has to make your life more easier.
+KotlinBukkitAPI is an API for Bukkit/SpigotAPI using the cool and nifty features Kotlin has to make your life more
+easier.
 
 * Need help? contact me on [Twitter](https://twitter.com/DevSrSouza) or join the [Discord](https://discord.gg/HhucBqk)
 
 ### Contents:
-  
-  * [Documentation](https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/)
-  * [Issue reporting](https://github.com/DevSrSouza/KotlinBukkitAPI/issues)
-  * [Dev builds (download)](http://jenkins.devsrsouza.com.br/job/KotlinBukkitAPI/)
-  * [Starter project](https://github.com/KotlinMinecraft/KBAPI-StarterProject/)
-  * [Setup for development](https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/Getting-Started)
+
+* [Documentation](https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/)
+* [Issue reporting](https://github.com/DevSrSouza/KotlinBukkitAPI/issues)
+* [Dev builds (download)](http://jenkins.devsrsouza.com.br/job/KotlinBukkitAPI/)
+* [Starter project](https://github.com/KotlinMinecraft/KBAPI-StarterProject/)
+* [Setup for development](https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/Getting-Started)
 
 # Samples
 
-KotlinBukkitAPI goes beyond this samples, and you can find all of it in the [wiki/documentation](https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/).
+KotlinBukkitAPI goes beyond this samples, and you can find all of it in
+the [wiki/documentation](https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/).
 
 Event DSL sample
+
 ```kotlin
 plugin.events {
-  event<PlayerJoinEvent> {
-    player.msg("&3Welcome ${player.name}".translateColor()) 
-  }
-  
-  event<PlayerQuitEvent> {
-    broadcast("&eThe player &c${player.name} &eleft :(".translateColor())
-  }
+    event<PlayerJoinEvent> {
+        player.msg("&3Welcome ${player.name}".translateColor())
+    }
+
+    event<PlayerQuitEvent> {
+        broadcast("&eThe player &c${player.name} &eleft :(".translateColor())
+    }
 }
 ```
 
 Simple Command DSL example
+
 ```kotlin
 plugin.simpleCommand("twitter") {
-  sender.msg("&eFollow me on Twitter :D &ahttps://twitter.com/DevSrSouza".translateColor())
+    sender.msg("&eFollow me on Twitter :D &ahttps://twitter.com/DevSrSouza".translateColor())
 }
 ```
 
 Item meta DSL and other stuff
+
 ```kotlin
 val gem = item(Material.DIAMOND).apply {
-  amount = 5
-  meta<ItemMeta> {
-    displayName = "&bGem".translateColor()
-  }
+    amount = 5
+    meta<ItemMeta> {
+        displayName = "&bGem".translateColor()
+    }
 }
 val encbook = item(Material.ENCHANTED_BOOK).meta<EnchantmentStorageMeta> {
-  displayName = "&4&lThe powerful BOOK".translateColor()
-  addStoredEnchant(Enchantment.DAMAGE_ALL, 10, true) // putting sharpness 10 to the book
+    displayName = "&4&lThe powerful BOOK".translateColor()
+    addStoredEnchant(Enchantment.DAMAGE_ALL, 10, true) // putting sharpness 10 to the book
 }
 ```
 
 Another approach:
+
 ```
 val gem = item(Material.DIAMOND, amount = 5).displayName("&bGem".translateColor())
 
@@ -72,36 +78,37 @@ val encbook = metadataItem<EnchantmentStorageMeta>(Material.ENCHANTED_BOOK) {
 ```
 
 Menu creator DSL
+
 ```kotlin
 val myMenu = menu(+"&cWarps", 3, true) {
 
-  val arenaPvP = item(Material.DIAMOND_SWORD) {
-      addEnchant(Enchantment.DAMAGE_ALL, 5, true)
-      displayName = "&4Arena PvP".translateColor()
-  }
-
-  slot(2, 4, arenaPvP) { // Line, Slot
-    onClick {
-      player.teleport(Location(player.world, 250, 70, -355))
-      close() // close the menu
+    val arenaPvP = item(Material.DIAMOND_SWORD) {
+        addEnchant(Enchantment.DAMAGE_ALL, 5, true)
+        displayName = "&4Arena PvP".translateColor()
     }
-  }
 
-  slot(2, 6, item(Material.GOLD).displayName("&6Shop".translateColor())) {
-    onClick {
-      player.teleport(Location(player.world, 2399, 70, -1234))
-      close() // close the menu
+    slot(2, 4, arenaPvP) { // Line, Slot
+        onClick {
+            player.teleport(Location(player.world, 250, 70, -355))
+            close() // close the menu
+        }
     }
-  }
 
-  // when the menu renders to a player, will show the Paper item with their name.
-  slot(3, 9, item(Material.PAPER).displayName("Hello {player}")) {
-    onRender {
-      showingItem?.meta<ItemMeta> {
-         displayName = displayName.replace("{player}", player.name)
-      } 
+    slot(2, 6, item(Material.GOLD).displayName("&6Shop".translateColor())) {
+        onClick {
+            player.teleport(Location(player.world, 2399, 70, -1234))
+            close() // close the menu
+        }
     }
-  }
+
+    // when the menu renders to a player, will show the Paper item with their name.
+    slot(3, 9, item(Material.PAPER).displayName("Hello {player}")) {
+        onRender {
+            showingItem?.meta<ItemMeta> {
+                displayName = displayName.replace("{player}", player.name)
+            }
+        }
+    }
 }
 
 // open to player
@@ -113,28 +120,32 @@ You can find more examples in the [Documentation](https://github.com/DevSrSouza/
 # Project
 
 ## Dependencies
+
 | Name | Version |
 | --- | --- |
-| [Spigot API](https://hub.spigotmc.org/stash/projects/SPIGOT/repos/spigot/) | 1.8.8+ |
+| [Spigot API](https://hub.spigotmc.org/stash/projects/SPIGOT/repos/spigot/) | 1.12.2+ |
 
 ## Dependencies Embed
 
-If you shade your plugin or use PDM, this dependencies should not be loaded be your plugin, you should let the KotlinBukkitAPI provide it at runtime to prevent conflicts.
+If you shade your plugin or use PDM, this dependencies should not be loaded be your plugin, you should let the
+KotlinBukkitAPI provide it at runtime to prevent conflicts.
 
-More about how to setup a project with KotlinBukkitAPI [here](https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/Getting-Started).
+More about how to setup a project with
+KotlinBukkitAPI [here](https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/Getting-Started).
 
 | Name | Version |
 | --- | --- |
-| Kotlin STD + JDK8 | 1.4.10 |
-| Kotlin Reflect | 1.4.10 |
-| [Kotlinx-coroutines](https://github.com/Kotlin/kotlinx.coroutines/) | 1.3.9 |
+| Kotlin STD + JDK8 | 1.4.31 |
+| Kotlin Reflect | 1.4.31 |
+| [Kotlinx-coroutines](https://github.com/Kotlin/kotlinx.coroutines/) | 1.4.3 |
 | [Skedule](https://github.com/okkero/Skedule) | 1.2.6 |
-| [Kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) | 1.4.0-RC  |
-| [KAML](https://github.com/charleskorn/kaml) | 0.19.0 |
-| [Exposed](https://github.com/JetBrains/Exposed/) | 0.25.1 |
-| [HikariCP](https://github.com/brettwooldridge/HikariCP/) | 3.3.1 |
+| [Kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) | 1.1.0  |
+| [KAML](https://github.com/charleskorn/kaml) | 0.28.3 |
+| [Exposed](https://github.com/JetBrains/Exposed/) | 0.29.1 |
+| [HikariCP](https://github.com/brettwooldridge/HikariCP/) | 4.0.3 |
 
 ## Modules
+
 | Module | Description |
 | --- | --- |
 | Core | The heart of the project containing the important API and extensions |

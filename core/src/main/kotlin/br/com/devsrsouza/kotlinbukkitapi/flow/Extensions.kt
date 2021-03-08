@@ -3,6 +3,7 @@ package br.com.devsrsouza.kotlinbukkitapi.flow
 import br.com.devsrsouza.kotlinbukkitapi.dsl.command.Executor
 import br.com.devsrsouza.kotlinbukkitapi.extensions.event.SimpleKListener
 import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.WithPlugin
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.filter
 import org.bukkit.entity.Player
@@ -29,38 +30,42 @@ import org.bukkit.plugin.Plugin
  * }
  * ```
  */
+@ExperimentalCoroutinesApi
 inline fun <reified T : PlayerEvent> Executor<Player>.commandPlayerEventFlow(
-        priority: EventPriority = EventPriority.NORMAL,
-        ignoreCancelled: Boolean = false,
-        channel: Channel<T> = Channel<T>(Channel.CONFLATED),
-        listener: Listener = SimpleKListener(command.plugin),
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    channel: Channel<T> = Channel(Channel.CONFLATED),
+    listener: Listener = SimpleKListener(command.plugin),
 ) = playerEventFlow(sender, command.plugin, priority, ignoreCancelled, channel, listener)
 
 /**
  * Creates a event flow for [PlayerEvent] that auto filter for only events from [player].
  */
+@ExperimentalCoroutinesApi
 inline fun <reified T : PlayerEvent> WithPlugin<*>.playerEventFlow(
-        player: Player,
-        priority: EventPriority = EventPriority.NORMAL,
-        ignoreCancelled: Boolean = false,
-        channel: Channel<T> = Channel<T>(Channel.CONFLATED),
-        listener: Listener = SimpleKListener(plugin),
+    player: Player,
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    channel: Channel<T> = Channel(Channel.CONFLATED),
+    listener: Listener = SimpleKListener(plugin),
 ) = plugin.playerEventFlow(player, priority, ignoreCancelled, channel, listener)
 
+@ExperimentalCoroutinesApi
 inline fun <reified T : PlayerEvent> Plugin.playerEventFlow(
-        player: Player,
-        priority: EventPriority = EventPriority.NORMAL,
-        ignoreCancelled: Boolean = false,
-        channel: Channel<T> = Channel<T>(Channel.CONFLATED),
-        listener: Listener = SimpleKListener(this),
+    player: Player,
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    channel: Channel<T> = Channel(Channel.CONFLATED),
+    listener: Listener = SimpleKListener(this),
 ) = playerEventFlow(player, this, priority, ignoreCancelled, channel, listener)
 
+@ExperimentalCoroutinesApi
 inline fun <reified T : PlayerEvent> playerEventFlow(
-        player: Player,
-        plugin: Plugin,
-        priority: EventPriority = EventPriority.NORMAL,
-        ignoreCancelled: Boolean = false,
-        channel: Channel<T> = Channel<T>(Channel.CONFLATED),
-        listener: Listener = SimpleKListener(plugin),
-) = eventFlow<T>(T::class, plugin, player, priority, ignoreCancelled, channel, listener)
-        .filter { it.player.name == player.name }
+    player: Player,
+    plugin: Plugin,
+    priority: EventPriority = EventPriority.NORMAL,
+    ignoreCancelled: Boolean = false,
+    channel: Channel<T> = Channel(Channel.CONFLATED),
+    listener: Listener = SimpleKListener(plugin),
+) = eventFlow(T::class, plugin, player, priority, ignoreCancelled, channel, listener)
+    .filter { it.player.name == player.name }

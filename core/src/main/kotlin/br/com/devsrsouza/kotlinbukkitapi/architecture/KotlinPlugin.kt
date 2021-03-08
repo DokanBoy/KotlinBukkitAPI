@@ -1,6 +1,9 @@
 package br.com.devsrsouza.kotlinbukkitapi.architecture
 
-import br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle.*
+import br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle.Lifecycle
+import br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle.LifecycleEvent
+import br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle.LifecycleListener
+import br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle.PluginLifecycleListener
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.concurrent.ConcurrentHashMap
 

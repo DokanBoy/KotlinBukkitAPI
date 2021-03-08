@@ -1,7 +1,5 @@
 package br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle
 
-import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
-
 /**
  * Holds a lifecycle listener class and its priority
  */

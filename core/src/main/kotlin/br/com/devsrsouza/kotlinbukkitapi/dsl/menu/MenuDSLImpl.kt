@@ -6,9 +6,9 @@ import br.com.devsrsouza.kotlinbukkitapi.dsl.menu.slot.SlotEventHandlerDSL
 import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.WithPlugin
 import br.com.devsrsouza.kotlinbukkitapi.extensions.scheduler.task
 import br.com.devsrsouza.kotlinbukkitapi.menu.*
-import br.com.devsrsouza.kotlinbukkitapi.menu.slot.Slot
 import br.com.devsrsouza.kotlinbukkitapi.menu.slot.MenuPlayerSlotRender
 import br.com.devsrsouza.kotlinbukkitapi.menu.slot.MenuPlayerSlotUpdate
+import br.com.devsrsouza.kotlinbukkitapi.menu.slot.Slot
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory

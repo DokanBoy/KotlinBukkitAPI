@@ -2,6 +2,7 @@ package br.com.devsrsouza.kotlinbukkitapi.flow
 
 import br.com.devsrsouza.kotlinbukkitapi.extensions.event.*
 import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.WithPlugin
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
@@ -16,20 +17,22 @@ import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.plugin.Plugin
 import kotlin.reflect.KClass
 
+@ExperimentalCoroutinesApi
 inline fun <reified T : Event> WithPlugin<*>.eventFlow(
     assign: Player? = null,
     priority: EventPriority = EventPriority.NORMAL,
     ignoreCancelled: Boolean = false,
-    channel: Channel<T> = Channel<T>(Channel.CONFLATED),
+    channel: Channel<T> = Channel(Channel.CONFLATED),
     listener: Listener = plugin.events {},
     assignListener: Listener = plugin.events {}
-): Flow<T> = plugin.eventFlow<T>(assign, priority, ignoreCancelled, channel, listener, assignListener)
+): Flow<T> = plugin.eventFlow(assign, priority, ignoreCancelled, channel, listener, assignListener)
 
+@ExperimentalCoroutinesApi
 inline fun <reified T : Event> Plugin.eventFlow(
     assign: Player? = null,
     priority: EventPriority = EventPriority.NORMAL,
     ignoreCancelled: Boolean = false,
-    channel: Channel<T> = Channel<T>(Channel.CONFLATED),
+    channel: Channel<T> = Channel(Channel.CONFLATED),
     listener: Listener = events {},
     assignListener: Listener = events {}
 ): Flow<T> = eventFlow(T::class, this, assign, priority, ignoreCancelled, channel, listener, assignListener)
@@ -39,6 +42,7 @@ inline fun <reified T : Event> Plugin.eventFlow(
  *
  * [assign] is use for auto cancel the Flow when the Player disconnects.
  */
+@ExperimentalCoroutinesApi
 fun <T : Event> eventFlow(
     type: KClass<T>,
     plugin: Plugin,

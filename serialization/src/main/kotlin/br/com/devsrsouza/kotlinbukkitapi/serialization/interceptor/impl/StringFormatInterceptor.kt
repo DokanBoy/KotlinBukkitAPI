@@ -7,7 +7,6 @@ import br.com.devsrsouza.kotlinbukkitapi.serialization.interceptor.impl.encoder.
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.StringFormat
-import kotlinx.serialization.decodeFromString
 
 class StringFormatInterceptor(
         private val delegate: StringFormat,

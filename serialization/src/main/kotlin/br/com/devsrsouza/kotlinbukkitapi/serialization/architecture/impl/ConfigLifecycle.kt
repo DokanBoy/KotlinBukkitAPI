@@ -8,6 +8,7 @@ import br.com.devsrsouza.kotlinbukkitapi.architecture.lifecycle.getOrInsertGener
 import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.WithPlugin
 import br.com.devsrsouza.kotlinbukkitapi.serialization.SerializationConfig
 import br.com.devsrsouza.kotlinbukkitapi.serialization.architecture.getConfig
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 import kotlin.reflect.KType
@@ -23,9 +24,13 @@ internal class ConfigLifecycle(
         override val plugin: KotlinPlugin
 ) : PluginLifecycleListener, WithPlugin<KotlinPlugin> {
     // String = Descriptor name
+    @ExperimentalSerializationApi
     internal val serializationConfigurations = hashMapOf<String, SerializationConfig<Any>>()
 
+    @ExperimentalSerializationApi
     internal val onEnableLoadSerializationConfigurations = mutableListOf<SerializationConfig<*>>()
+
+    @ExperimentalSerializationApi
     internal val onDisableSaveSerializationConfigurations = mutableListOf<SerializationConfig<*>>()
 
     override fun invoke(event: LifecycleEvent) {
@@ -36,22 +41,26 @@ internal class ConfigLifecycle(
         }
     }
 
+    @ExperimentalSerializationApi
     fun onPluginEnable() {
         for (config in onEnableLoadSerializationConfigurations)
             config.load()
     }
 
+    @ExperimentalSerializationApi
     fun onPluginDisable() {
         for (config in onDisableSaveSerializationConfigurations)
             config.save()
     }
 
+    @ExperimentalSerializationApi
     fun onConfigReload() {
         for (config in serializationConfigurations.values)
             config.reload()
     }
 }
 
+@ExperimentalSerializationApi
 internal fun KotlinPlugin.registerConfiguration(
         config: SerializationConfig<Any>,
         loadOnEnable: Boolean,
@@ -78,8 +87,10 @@ class ConfigDelegate<T, R>(
         val type: KType,
         val deep: T.() -> R
 ) : ReadOnlyProperty<LifecycleListener<*>, R> {
+    @ExperimentalSerializationApi
     private var configCache: SerializationConfig<*>? = null
 
+    @ExperimentalSerializationApi
     override fun getValue(
             thisRef: LifecycleListener<*>,
             property: KProperty<*>

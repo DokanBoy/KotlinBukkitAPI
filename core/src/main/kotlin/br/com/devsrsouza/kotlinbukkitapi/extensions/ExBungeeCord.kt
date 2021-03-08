@@ -2,8 +2,8 @@ package br.com.devsrsouza.kotlinbukkitapi.extensions.bungeecord
 
 import br.com.devsrsouza.kotlinbukkitapi.controllers.provideBungeeCordController
 import br.com.devsrsouza.kotlinbukkitapi.utils.BungeeCordRequest
-import org.bukkit.entity.Player
 import com.google.common.io.ByteStreams
+import org.bukkit.entity.Player
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
